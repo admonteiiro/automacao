@@ -47,44 +47,57 @@ with sync_playwright() as p:
     page.fill('//html/body/app-root/ng-component/app-shell/header/div/div/app-shell-top-bar/shell-app-second-gen-top-bar-content/div[2]/global-time-frame-selector/div/time-frame-selector/div/div/div/input', "-90d to now")
     page.keyboard.press("Enter")
     time.sleep(2)
-    #abrir primeiro erro
 
-    page.locator('//html/body/app-root/ng-component/app-shell/main/pr-problems-overview/page-content/div/dt-quick-filter/dt-drawer-container/div/div/dt-card/div[2]/pr-problems-table/dt-container-breakpoint-observer/dt-table/dt-expandable-row[2]/div[1]/dt-cell[2]/dt-info-group/div/dt-info-group-title/a').click()
-    #show more
-    page.locator('id=gwt-uid-31').click()
+    # Open first error
 
-    #coletando dados da div
-    rows = page.locator("div.dYk-Cc")
-    texts = rows.all_text_contents()
-    count = rows.count()
-    for i in range(count):
-        print(rows.nth(i).text_content())
-    texts = rows.evaluate_all("list => list.map(element => element.textContent)")
+    cont = 1
+    while cont < 53:
+        page.locator("text=Multiple service problems").nth(cont).click()
+        # Click div[role="button"]:has-text("Show more")
+        page.locator("div[role=\"button\"]:has-text(\"Show more\")").click()
 
-    rows = page.locator("div.dIc-x")
-    texts = rows.all_text_contents()
-    count = rows.count()
-    for i in range(count):
-        print(rows.nth(i).text_content())
-    texts = rows.evaluate_all("list => list.map(element => element.textContent)")
+        if page.locator.nth()
+            if page.is_visible("text='Affected entry point services'"):
+                time.sleep(1)
+                rows = page.locator("div.dYk-Cc")
+                texts = rows.all_text_contents()
+                count = rows.count()
+                for i in range(count):
+                    print(rows.nth(i).text_content())
+                texts = rows.evaluate_all("list => list.map(element => element.textContent)")
 
-    page.go_back()
-    time.sleep(5)
+                rows = page.locator("div.dIc-x")
+                texts = rows.all_text_contents()
+                count = rows.count()
+                for i in range(count):
+                    print(rows.nth(i).text_content())
+                texts = rows.evaluate_all("list => list.map(element => element.textContent)")
+                page.go_back()
 
-    page.locator('//html/body/app-root/ng-component/app-shell/main/pr-problems-overview/page-content/div/dt-quick-filter/dt-drawer-container/div/div/dt-card/div[2]/pr-problems-table/dt-container-breakpoint-observer/dt-table/dt-expandable-row[2]/div[1]/dt-cell[2]/dt-info-group/div/dt-info-group-title/a').click()
-    page.locator('id=gwt-uid-31').click()
-    rows = page.locator("div.dYk-Cc")
-    texts = rows.all_text_contents()
-    count = rows.count()
-    for i in range(count):
-        print(rows.nth(i).text_content())
-    texts = rows.evaluate_all("list => list.map(element => element.textContent)")
+            elif page.is_visible("text='Top 3 entry point services'"):
+                time.sleep(1)
+                rows = page.locator("div.dYk-Cc")
+                texts = rows.all_text_contents()
+                count = rows.count()
+                for i in range(count):
+                    print(rows.nth(i).text_content())
+                texts = rows.evaluate_all("list => list.map(element => element.textContent)")
 
-    rows = page.locator("div.dIc-x")
-    texts = rows.all_text_contents()
-    count = rows.count()
-    for i in range(count):
-        print(rows.nth(i).text_content())
-    texts = rows.evaluate_all("list => list.map(element => element.textContent)")
-
-
+                rows = page.locator("div.dIc-x")
+                texts = rows.all_text_contents()
+                count = rows.count()
+                for i in range(count):
+                    print(rows.nth(i).text_content())
+                texts = rows.evaluate_all("list => list.map(element => element.textContent)")
+                page.go_back()
+            else:
+                time.sleep(1)
+                rows = page.locator("div.dIc-x")
+                texts = rows.all_text_contents()
+                count = rows.count()
+                for i in range(count):
+                    print(rows.nth(i).text_content())
+                texts = rows.evaluate_all("list => list.map(element => element.textContent)")
+                page.go_back()
+        cont = cont + 1
+        print(cont)
